@@ -1,0 +1,32 @@
+{
+    "schemaVersion": 1,
+    "id": "bits-and-bobs",
+    "version": "${version}",
+    "name": "Bits and Bobs",
+    "description": "Little tweaks and additions that are configurable and have sensible defaults.",
+    "authors": ["Leon Davis"],
+    "contact": {
+        "sources": "https://github.com/leonskidev/bits-and-bobs",
+        "issues": "https://github.com/leonskidev/bits-and-bobs/issues"
+    },
+    "license": "BSD-3-Clause",
+    "icon": "assets/bits-and-bobs/icon.png",
+    "environment": "server",
+    "entrypoints": {
+        "main": [
+            "leonski.bitsandbobs.BitsAndBobs"
+        ],
+        "fabric-datagen": [
+            "leonski.bitsandbobs.data.BitsAndBobsDataGenerator"
+        ]
+    },
+    "mixins": [
+        "bits-and-bobs.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=0.15.7",
+        "minecraft": "~1.20.1",
+        "java": ">=17",
+        "fabric-api": "*"
+    }
+}
