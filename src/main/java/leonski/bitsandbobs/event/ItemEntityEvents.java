@@ -4,15 +4,34 @@ import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.entity.ItemEntity;
 
-public interface ItemEntityEvents {
-    Event<ItemEntityEvents> TICK = EventFactory.createArrayBacked(
-        ItemEntityEvents.class,
-        (listeners) -> (entity) -> {
-            for (ItemEntityEvents listener : listeners) {
-                listener.tick(entity);
-            }
-        }
-    );
+public final class ItemEntityEvents {
+    private ItemEntityEvents() {}
 
-    void tick(ItemEntity entity);
+    /**
+     * Called at the start of the {@linkcode ItemEntity} tick.
+     */
+    public static final Event<StartTick> START_TICK = EventFactory.createArrayBacked(StartTick.class, (listeners) -> (entity) -> {
+        for (StartTick listener : listeners) {
+            listener.onStartTick(entity);
+        }
+    });
+
+    /**
+     * Called at the end of the {@linkcode ItemEntity} tick.
+     */
+    public static final Event<EndTick> END_TICK = EventFactory.createArrayBacked(EndTick.class, (listeners) -> (entity) -> {
+        for (EndTick listener : listeners) {
+            listener.onEndTick(entity);
+        }
+    });
+
+    @FunctionalInterface
+    public interface StartTick {
+        void onStartTick(ItemEntity entity);
+    }
+
+    @FunctionalInterface
+    public interface EndTick {
+        void onEndTick(ItemEntity entity);
+    }
 }

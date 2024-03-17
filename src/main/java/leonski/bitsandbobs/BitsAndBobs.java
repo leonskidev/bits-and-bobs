@@ -28,7 +28,7 @@ public class BitsAndBobs implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        ItemEntityEvents.TICK.register((entity) -> {
+        ItemEntityEvents.END_TICK.register((entity) -> {
             World world = entity.getWorld();
             ItemStack stack = entity.getStack();
             GameRules gameRules = world.getGameRules();

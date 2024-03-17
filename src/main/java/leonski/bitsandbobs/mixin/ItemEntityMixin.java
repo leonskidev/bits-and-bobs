@@ -11,8 +11,12 @@ import net.minecraft.entity.ItemEntity;
 @Mixin(ItemEntity.class)
 public class ItemEntityMixin {
     @Inject(at = @At("HEAD"), method = "tick")
-    private void tick(CallbackInfo info) {
-        ItemEntity entity = ((ItemEntity)(Object)this);
-        ItemEntityEvents.TICK.invoker().tick(entity);
+    private void onStartTick(CallbackInfo ci) {
+        ItemEntityEvents.START_TICK.invoker().onStartTick((ItemEntity)(Object)this);
+    }
+
+    @Inject(at = @At("TAIL"), method = "tick")
+    private void onEndTick(CallbackInfo ci) {
+        ItemEntityEvents.END_TICK.invoker().onEndTick((ItemEntity)(Object)this);
     }
 }
