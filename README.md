@@ -1,6 +1,6 @@
 # Bits and Bobs
 
-Little tweaks and additions that are configurable and have sensible defaults.
+Little tweaks and additions that are configurable with sensible defaults.
 
 ## Licence
 

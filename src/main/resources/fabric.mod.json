@@ -3,7 +3,7 @@
     "id": "bits-and-bobs",
     "version": "${version}",
     "name": "Bits and Bobs",
-    "description": "Little tweaks and additions that are configurable and have sensible defaults.",
+    "description": "Little tweaks and additions that are configurable with sensible defaults.",
     "authors": ["Leon Davis"],
     "contact": {
         "sources": "https://github.com/leonskidev/bits-and-bobs",
