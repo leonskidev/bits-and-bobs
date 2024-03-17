@@ -11,7 +11,7 @@
     },
     "license": "BSD-3-Clause",
     "icon": "assets/bits-and-bobs/icon.png",
-    "environment": "server",
+    "environment": "*",
     "entrypoints": {
         "main": [
             "leonski.bitsandbobs.BitsAndBobs"
