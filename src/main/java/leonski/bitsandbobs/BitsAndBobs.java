@@ -37,15 +37,12 @@ public class BitsAndBobs implements ModInitializer {
 
             if (doItemsPlant && entity.isOnGround() && entity.age > 100 && (stack.isIn(ItemTags.SAPLINGS) || stack.isIn(SEEDS))) {
                 Block block = Block.getBlockFromItem(stack.getItem());
+                BlockState blockState = block.getDefaultState();
+                BlockPos blockPos = entity.getBlockPos();
+                BlockPos aboveBlockPos = blockPos.up();
 
-                if (block != null) {
-                    BlockState blockState = block.getDefaultState();
-                    BlockPos blockPos = entity.getBlockPos();
-                    BlockPos aboveBlockPos = blockPos.up();
-
-                    if ((blockState.canPlaceAt(world, blockPos) && world.setBlockState(blockPos, blockState)) || (blockState.canPlaceAt(world, aboveBlockPos) && world.setBlockState(aboveBlockPos, blockState))) {
-                        stack.decrement(1);
-                    }
+                if ((blockState.canPlaceAt(world, blockPos) && world.setBlockState(blockPos, blockState)) || (blockState.canPlaceAt(world, aboveBlockPos) && world.setBlockState(aboveBlockPos, blockState))) {
+                    stack.decrement(1);
                 }
             }
         });
