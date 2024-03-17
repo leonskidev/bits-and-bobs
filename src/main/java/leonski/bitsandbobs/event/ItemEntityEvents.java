@@ -8,7 +8,7 @@ public final class ItemEntityEvents {
     private ItemEntityEvents() {}
 
     /**
-     * Called at the start of the {@linkcode ItemEntity} tick.
+     * Called at the start of the {@link ItemEntity} tick.
      */
     public static final Event<StartTick> START_TICK = EventFactory.createArrayBacked(StartTick.class, (listeners) -> (entity) -> {
         for (StartTick listener : listeners) {
@@ -17,7 +17,7 @@ public final class ItemEntityEvents {
     });
 
     /**
-     * Called at the end of the {@linkcode ItemEntity} tick.
+     * Called at the end of the {@link ItemEntity} tick.
      */
     public static final Event<EndTick> END_TICK = EventFactory.createArrayBacked(EndTick.class, (listeners) -> (entity) -> {
         for (EndTick listener : listeners) {
