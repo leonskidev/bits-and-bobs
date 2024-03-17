@@ -41,8 +41,9 @@ public class BitsAndBobs implements ModInitializer {
                 if (block != null) {
                     BlockState blockState = block.getDefaultState();
                     BlockPos blockPos = entity.getBlockPos();
+                    BlockPos aboveBlockPos = blockPos.up();
 
-                    if (blockState.canPlaceAt(world, blockPos) && world.setBlockState(blockPos, blockState)) {
+                    if ((blockState.canPlaceAt(world, blockPos) && world.setBlockState(blockPos, blockState)) || (blockState.canPlaceAt(world, aboveBlockPos) && world.setBlockState(aboveBlockPos, blockState))) {
                         stack.decrement(1);
                     }
                 }
