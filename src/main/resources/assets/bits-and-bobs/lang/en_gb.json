@@ -1,4 +1,4 @@
 {
-    "gamerule.doItemReplant": "Replant items",
-    "gamerule.doItemReplant.description": "Allows sapling and seed items on the ground to replant themselves."
+    "gamerule.doItemsPlant": "Plant items",
+    "gamerule.doItemsPlant.description": "Allows saplings and seeds on the ground to plant themselves."
 }

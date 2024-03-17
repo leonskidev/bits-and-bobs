@@ -19,11 +19,11 @@ import net.minecraft.world.GameRules.Category;
 
 public class BitsAndBobs implements ModInitializer {
     public static final TagKey<Item> SEEDS;
-    public static final GameRules.Key<GameRules.BooleanRule> DO_ITEM_REPLANT;
+    public static final GameRules.Key<GameRules.BooleanRule> DO_ITEMS_PLANT;
 
     static {
         SEEDS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "seeds"));
-        DO_ITEM_REPLANT = GameRuleRegistry.register("doItemReplant", Category.DROPS, GameRuleFactory.createBooleanRule(true));
+        DO_ITEMS_PLANT = GameRuleRegistry.register("doItemsPlant", Category.DROPS, GameRuleFactory.createBooleanRule(true));
     };
 
     @Override
@@ -33,9 +33,9 @@ public class BitsAndBobs implements ModInitializer {
             ItemStack stack = entity.getStack();
             GameRules gameRules = world.getGameRules();
 
-            boolean doItemReplant = gameRules.getBoolean(DO_ITEM_REPLANT);
+            boolean doItemsPlant = gameRules.getBoolean(DO_ITEMS_PLANT);
 
-            if (doItemReplant && entity.isOnGround() && (stack.isIn(ItemTags.SAPLINGS) || stack.isIn(SEEDS))) {
+            if (doItemsPlant && entity.isOnGround() && entity.age > 100 && (stack.isIn(ItemTags.SAPLINGS) || stack.isIn(SEEDS))) {
                 Block block = Block.getBlockFromItem(stack.getItem());
 
                 if (block != null) {
