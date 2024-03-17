@@ -96,7 +96,6 @@ publishing {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "bits-and-bobs"
-    syncBodyFrom = rootProject.file("README.md").text
     versionNumber = project.version
     versionType = "release"
     uploadFile = remapJar
