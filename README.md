@@ -4,7 +4,8 @@ Little tweaks and additions that are configurable with sensible defaults.
 
 ## Game Rules
 
-- `doItemsPlant` — Allows saplings and seeds on the ground to plant themselves.
+- `droppedSeedsPlantDelay` — Plants dropped seeds after a delay in ticks.
+- `droppedSaplingsPlantDelay` — Plants dropped saplings after a delay in ticks.
 
 ## Licence
 
