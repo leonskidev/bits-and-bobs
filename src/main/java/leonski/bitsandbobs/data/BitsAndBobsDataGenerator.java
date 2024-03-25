@@ -28,12 +28,14 @@ public class BitsAndBobsDataGenerator implements DataGeneratorEntrypoint {
         protected void configure(WrapperLookup arg) {
             getOrCreateTagBuilder(BitsAndBobs.SEEDS)
                 .add(Items.WHEAT_SEEDS)
+                .add(Items.CARROT)
+                .add(Items.POTATO)
                 .add(Items.BEETROOT_SEEDS)
                 .add(Items.MELON_SEEDS)
                 .add(Items.PUMPKIN_SEEDS)
-                .add(Items.CARROT)
-                .add(Items.POTATO)
-                .add(Items.NETHER_WART);
+                .add(Items.NETHER_WART)
+                .add(Items.TORCHFLOWER_SEEDS)
+                .add(Items.PITCHER_POD);
         }
     }
 }
