@@ -1,4 +1,6 @@
 {
-    "gamerule.doItemsPlant": "Plant items",
-    "gamerule.doItemsPlant.description": "Allows saplings and seeds on the ground to plant themselves."
+    "gamerule.droppedSeedsPlantDelay": "Plant dropped seeds",
+    "gamerule.droppedSeedsPlantDelay.description": "Plants dropped seeds after a delay in ticks.",
+    "gamerule.droppedSaplingsPlantDelay": "Plant dropped saplings",
+    "gamerule.droppedSaplingsPlantDelay.description": "Plants dropped saplings after a delay in ticks."
 }

@@ -19,30 +19,40 @@ import net.minecraft.world.GameRules.Category;
 
 public class BitsAndBobs implements ModInitializer {
     public static final TagKey<Item> SEEDS;
-    public static final GameRules.Key<GameRules.BooleanRule> DO_ITEMS_PLANT;
+
+    public static final GameRules.Key<GameRules.IntRule> DROPPED_SEEDS_PLANT_DELAY;
+    public static final GameRules.Key<GameRules.IntRule> DROPPED_SAPLINGS_PLANT_DELAY;
 
     static {
         SEEDS = TagKey.of(RegistryKeys.ITEM, new Identifier("c", "seeds"));
-        DO_ITEMS_PLANT = GameRuleRegistry.register("doItemsPlant", Category.DROPS, GameRuleFactory.createBooleanRule(true));
+
+        DROPPED_SEEDS_PLANT_DELAY = GameRuleRegistry.register("droppedSeedsPlantDelay", Category.DROPS, GameRuleFactory.createIntRule(100, 0));
+        DROPPED_SAPLINGS_PLANT_DELAY = GameRuleRegistry.register("droppedSaplingsPlantDelay", Category.DROPS, GameRuleFactory.createIntRule(100, 0));
     };
 
     @Override
     public void onInitialize() {
         ItemEntityEvents.END_TICK.register((entity) -> {
             World world = entity.getWorld();
-            ItemStack stack = entity.getStack();
             GameRules gameRules = world.getGameRules();
+            ItemStack stack = entity.getStack();
 
-            boolean doItemsPlant = gameRules.getBoolean(DO_ITEMS_PLANT);
+            int droppedSeedsPlantDelay = gameRules.getInt(DROPPED_SEEDS_PLANT_DELAY);
+            int droppedSaplingsPlantDelay = gameRules.getInt(DROPPED_SAPLINGS_PLANT_DELAY);
 
-            if (doItemsPlant && entity.isOnGround() && entity.age > 100 && (stack.isIn(ItemTags.SAPLINGS) || stack.isIn(SEEDS))) {
-                Block block = Block.getBlockFromItem(stack.getItem());
-                BlockState blockState = block.getDefaultState();
-                BlockPos blockPos = entity.getBlockPos();
-                BlockPos aboveBlockPos = blockPos.up();
+            if (entity.isOnGround()) {
+                boolean isValidDroppedSeeds = droppedSeedsPlantDelay != 0 && stack.isIn(SEEDS) && entity.age > droppedSeedsPlantDelay;
+                boolean isValidDroppedSaplings = droppedSaplingsPlantDelay != 0 && stack.isIn(ItemTags.SAPLINGS) && entity.age > droppedSaplingsPlantDelay;
 
-                if ((blockState.canPlaceAt(world, blockPos) && world.setBlockState(blockPos, blockState)) || (blockState.canPlaceAt(world, aboveBlockPos) && world.setBlockState(aboveBlockPos, blockState))) {
-                    stack.decrement(1);
+                if (isValidDroppedSeeds || isValidDroppedSaplings) {
+                    Block block = Block.getBlockFromItem(stack.getItem());
+                    BlockState blockState = block.getDefaultState();
+                    BlockPos blockPos = entity.getBlockPos();
+                    BlockPos aboveBlockPos = blockPos.up();
+
+                    if ((blockState.canPlaceAt(world, blockPos) && world.getBlockState(blockPos).isAir() && world.setBlockState(blockPos, blockState)) || (blockState.canPlaceAt(world, aboveBlockPos) && world.getBlockState(aboveBlockPos).isAir() && world.setBlockState(aboveBlockPos, blockState))) {
+                        stack.decrement(1);
+                    }
                 }
             }
         });
